@@ -1,14 +1,14 @@
 package com.training.jwa.model;
 
 public class Employee {
-	private String accountType;
+	private Boolean accountType;
 	private int employeeId;
 	private String employeeName;
 	private String employeePassword;
 	private int eAccountNum;
 	private double accountBalance;
 
-	public Employee(String accountType, int employeeId, String employeeName, String employeePassword, 
+	public Employee(Boolean accountType, int employeeId, String employeeName, String employeePassword, 
 					int eAccountNum, double accountBalance) {
 		super();
 		this.accountType = accountType;
@@ -19,11 +19,11 @@ public class Employee {
 		this.accountBalance = accountBalance;
 	}
 	
-	public String getAccountType() {
+	public Boolean getAccountType() {
 		return accountType;
 	}
 
-	public void setAccountType(String accountType) {
+	public void setAccountType(Boolean accountType) {
 		this.accountType = accountType;
 	}
 

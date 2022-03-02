@@ -2,6 +2,7 @@ package com.training.jwa.dao;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -22,11 +23,15 @@ public class CustomerDAOImpl implements CustomerDAO{
 	public void viewBalance(Customer customer) {
 		
 		Connection connection = DBConnection.getConnection();
-		Statement statement;
+		PreparedStatement statement;
 		try {
 			statement = connection.prepareStatement("select * from customer where username = ?");
-			//statement.setString(1, customer.getCustomerName());
+			statement.setString(1, customer.getCustomerName());
 			
+			ResultSet res = statement.executeQuery();
+			res.next();
+			
+			System.out.println("Printing customer's curerent balance: " +res);
 			//statement.execute();
 		} catch(SQLException e) {
 			e.printStackTrace();

@@ -68,7 +68,7 @@ public class BankApp {
 				} else {
 					System.out.println("username or password doesn't exist");
 				}
-				if(loginDAO.checkEmployee(username/*employee*/)) {
+				if(loginDAO.checkEmployee(username)) {
 					//employee account exists;
 					eMenu.EmployeeMenu();
 				if (loginDAO.checkCustomer(username)) {

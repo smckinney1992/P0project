@@ -57,14 +57,18 @@ public class EmployeeDAOImpl implements EmployeeDAO {
         PreparedStatement stat;
         
         try {
-            stat= con.prepareStatement("select * from customer where userId= ?");
+            stat= con.prepareStatement("select * from customer where Id= ?");
             stat.setInt(1, employee.getEmployeeId());
             ResultSet res = stat.executeQuery();
             
             while(res.next()) {
+            	employee.setEmployeeId(res.getInt(1));
+            	employee.setEmployeeName(res.getString(2));
+            	employee.setEmployeePassword(res.getString(3));
+            	employee.setAccountType(res.getBoolean(4));
             	
             }
-            
+            con.close();
         }catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -73,27 +77,24 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 	}
 
 	@Override
-	public void viewTransactions(Employee employee) {
+	public List<Employee> viewTransactions(Employee employee) {
 		System.out.println("Printing user transactions ");
-		/*List<Transaction> transactions = new ArrayList<Transaction>();
-		
+		List<Employee> transactions = new ArrayList<Employee>();
+		Connection con = DBConnection.getConnection();
 		Statement stat;
 		try {
 			stat = con.createStatement();
 			ResultSet res = stat.executeQuery("select * from transaction");
 
 			while (res.next()) {
-				Employee employee = new Employee();
-				employee.setProductId(res.getInt(1));
-				employee.setProductName(res.getString(2));
-				employee.setQuanityOnHand(res.getInt(3));
-				employee.setPrice(res.getInt(4));
-				employee.add(transactions);
+				employee.setEmployeeId(res.getInt(1));
+				employee.setAccountBalance(res.getDouble(2));
+				transactions.add(employee);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return transactions;*/
+		return transactions;
 
 	}
 		

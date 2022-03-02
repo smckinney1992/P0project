@@ -1,10 +1,12 @@
 package com.training.jwa;
 
+import java.sql.Connection;
 import java.util.Scanner;
 
 import com.training.jwa.dao.LoginDAO;
 import com.training.jwa.dao.LoginDAOImpl;
 import com.training.jwa.model.Login;
+import com.training.jwa.utility.DBConnection;
 
 public class employeeMenu {
 	Scanner scanner = new Scanner(System.in);
