@@ -17,6 +17,7 @@ public class customerMenu {
 	CustomerDAO customDAO = new CustomerDAOImpl();
 	Login login = new Login();
 	double accountBalance = 0;
+	double amount = 0;
 	int customerId = 0;
 	String customerName = "";
 	String customerPassword = "";
@@ -40,17 +41,19 @@ public class customerMenu {
 	case 1:
 		System.out.println("Enter the customer name to view current balance :");
 		customerName = scanner.next();
-		Customer cust = new Customer(customerId, customerName, customerName, accountBalance);
+		Customer cust = new Customer(customerId, customerName, customerName, accountBalance, amount);
 		cust = customDAO.viewBalance(cust);
 		System.out.println(cust);
 		break;
 
 	case 2:
-		System.out.println("Enter the account number to withdraw from :");
-		int withdraw = scanner.nextInt();
+		System.out.println("Enter User ID: ");
+		int id = scanner.nextInt();
 		
 		System.out.println("Enter the amount to be withdrawn :");
-		//amount = scanner.nextInt();
+		amount = scanner.nextInt();
+		
+		Customer custom = new Customer(id, customerName, customerPassword, accountBalance, amount);
 		break;
 
 	case 3:

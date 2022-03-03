@@ -32,7 +32,7 @@ public class CustomerDAOImpl implements CustomerDAO{
 			res.next();
 			customer.setAccountBalance(res.getDouble(1));
 			
-			System.out.println("Printing customer's curerent balance: " +res);
+			//System.out.println("Printing customer's curerent balance: " +res);
 			//statement.execute();
 		} catch(SQLException e) {
 			e.printStackTrace();
@@ -49,7 +49,7 @@ public class CustomerDAOImpl implements CustomerDAO{
 		try {
 			stat = connection.prepareCall("call withdrawal(?,?,?)");
 			stat.setInt(1, customer.getCustomerId());
-			stat.setInt(2, customer.getAmount());
+			stat.setDouble(2, customer.getAmount());
 			
 			stat.registerOutParameter(3, Types.INTEGER);
 			stat.setInt(3, withdrawBalance);
@@ -72,7 +72,7 @@ public class CustomerDAOImpl implements CustomerDAO{
 		try {
 			stat = connection.prepareCall("call depositing(?,?,?)");
 			stat.setInt(1, customer.getCustomerId());
-			stat.setInt(2, customer.getAmount());
+			stat.setDouble(2, customer.getAmount());
 			
 			stat.registerOutParameter(3, Types.INTEGER);
 			stat.setInt(3, depositBalance);

@@ -88,7 +88,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 	
 	public Customer searchByEmployeeId(int customerId) {
 		Connection con = DBConnection.getConnection();
-		Customer customer = new Customer(customerId, customerName, customerPassword, accountBalance);
+		Customer customer = new Customer(customerId, customerName, customerPassword, accountBalance, 0);
 		PreparedStatement stat;
 		try {
 			stat = con.prepareStatement("select id from customer where Id = ?");

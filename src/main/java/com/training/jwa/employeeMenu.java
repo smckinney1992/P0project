@@ -66,7 +66,7 @@ public class employeeMenu {
 			case 3:
 				System.out.println("Please enter the user id you would like to view transaction log");
 				customerId = scanner.nextInt();
-				Customer customer = new Customer(customerId, customerName, customerPassword, accountBalance);
+				Customer customer = new Customer(customerId, customerName, customerPassword, accountBalance, 0);
 				if(searchByEmployeeId(customerId) != null) {
 					empDAO.viewTransactions(customer);
 				} else {

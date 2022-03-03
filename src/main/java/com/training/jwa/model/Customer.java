@@ -7,9 +7,9 @@ public class Customer {
 	private String customerPassword;
 	private int cAccountNum;
 	private double accountBalance;
-	private int amount;
+	private double amount;
 	
-	public Customer(int customerId, String customerName, String customerPassword, double accountBalance) {
+	public Customer(int customerId, String customerName, String customerPassword, double accountBalance, double amount2) {
 		super();
 		//this.accountType = accountType;
 		this.customerId = customerId;
@@ -17,7 +17,7 @@ public class Customer {
 		this.customerPassword = customerPassword;
 		//this.cAccountNum = cAccountNum;
 		this.accountBalance = accountBalance;
-		//this.amount = amount;
+		this.amount = amount2;
 	}
 
 	public Boolean getAccountType() {
@@ -68,11 +68,11 @@ public class Customer {
 		this.accountBalance = accountBalance;
 	}
 
-	public int getAmount() {
+	public double getAmount() {
 		return amount;
 	}
 
-	public void setAmount(int amount) {
+	public void setAmount(double amount) {
 		this.amount = amount;
 	}
 
