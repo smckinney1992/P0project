@@ -54,7 +54,7 @@ public class customerMenu {
 		System.out.println("Enter the amount to be withdrawn :");
 		BigDecimal money = scanner.nextBigDecimal();
 		cust = new Customer(customerId, customerName, customerPassword, accountBalance, amount);
-		customDAO.withdraw(cust);
+		int withdrawBalance = customDAO.withdraw(cust);
 		break;
 
 	case 3:
@@ -64,7 +64,7 @@ public class customerMenu {
 		System.out.println("Enter the amount to be deposited :");
 		BigDecimal dMoney = scanner.nextBigDecimal();
 		cust = new Customer(customerId, customerName, customerPassword, accountBalance, amount);
-		customDAO.deposit(cust);
+		int depositBalance = customDAO.deposit(cust);
 		
 		break;
 

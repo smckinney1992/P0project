@@ -1,5 +1,6 @@
 package com.training.jwa;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.util.Scanner;
 
@@ -26,6 +27,7 @@ public class employeeMenu {
 		int customerId = 0;
 		String customerName = "";
 		String customerPassword = "";
+		BigDecimal amount = null;
 		
 		
 		while (true) {
@@ -66,7 +68,7 @@ public class employeeMenu {
 			case 3:
 				System.out.println("Please enter the user id you would like to view transaction log");
 				customerId = scanner.nextInt();
-				Customer customer = new Customer(customerId, customerName, customerPassword, accountBalance, 0);
+				Customer customer = new Customer(customerId, customerName, customerPassword, accountBalance, amount);
 				if(searchByEmployeeId(customerId) != null) {
 					empDAO.viewTransactions(customer);
 				} else {
