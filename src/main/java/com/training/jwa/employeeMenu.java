@@ -18,6 +18,13 @@ public class employeeMenu {
 
 	public void EmployeeMenu() {
 		
+		String username = "";
+		int employeeId = 0;
+		String employeeName = "";
+		String employeePassword = "";
+		double accountBalance = 0;
+		int customerId = 0;
+		
 		while (true) {
 			System.out.println("BANK  -  EMPLOYEE MENU");
 			System.out.println("===================================================================================");
@@ -34,7 +41,7 @@ public class employeeMenu {
 			case 1:
 	
 				System.out.println("Please enter account username to approve account?");
-				String username = scanner.next();
+				username = scanner.next();
 				//Customer customer = null;
 				//empDAO.accountApproval(username);
 				boolean status = empDAO.accountApproval(username);
@@ -47,10 +54,21 @@ public class employeeMenu {
 
 			case 2:
 				System.out.println("Please enter the account you would like to view?");
+				employeeName = scanner.next();
+				Employee emp = new Employee(employeeId, employeeName, employeePassword, accountBalance);
+				emp = empDAO.viewAccount(emp);
+				System.out.println(emp);
 				break;
 
 			case 3:
-				//System.out.println("print log of " + customerName + "past transactions");
+				System.out.println("Please enter the user id you would like to view transaction log");
+				customerId = scanner.nextInt();
+				if(searchByEmployeeId(customerId).equals(customerId)) {
+					empDAO.viewTransactions(Customer customer);
+				} else {
+					System.out.println("Customer ID doesn't exist");
+				}
+				
 				break;
 
 			case 4:
@@ -63,5 +81,9 @@ public class employeeMenu {
 				break;
 			}
 		}
+	}
+	private Object searchByEmployeeId(int employeeId) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

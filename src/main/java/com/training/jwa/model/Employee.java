@@ -8,14 +8,14 @@ public class Employee {
 	private int eAccountNum;
 	private double accountBalance;
 
-	public Employee(Boolean accountType, int employeeId, String employeeName, String employeePassword, 
-					int eAccountNum, double accountBalance) {
+	public Employee(int employeeId, String employeeName, String employeePassword, 
+					double accountBalance) {
 		super();
-		this.accountType = accountType;
+		//this.accountType = accountType;
 		this.employeeId = employeeId;
 		this.employeeName = employeeName;
 		this.employeePassword = employeePassword;
-		this.eAccountNum = eAccountNum;
+		//this.eAccountNum = eAccountNum;
 		this.accountBalance = accountBalance;
 	}
 	
@@ -69,8 +69,7 @@ public class Employee {
 	
 	@Override
 	public String toString() {
-		return "Bank [accountType=" + accountType + ", employeeId=" + employeeId + ", employeeName=" + employeeName
-				+ ", employeePassword=" + employeePassword + ", eAccountNum=" + eAccountNum
-				+ ", accountBalance=" + accountBalance + "]";
+		return "Bank [employeeId=" + employeeId + ", employeeName=" + employeeName
+				+ ", employeePassword=" + employeePassword + ", accountBalance=" + accountBalance + "]";
 	}
 }

@@ -7,7 +7,7 @@ import com.training.jwa.model.Employee;
 
 public interface EmployeeDAO {
 	public boolean accountApproval(String username);
-	public void viewAccount(Employee employee);
-	public List<Employee> viewTransactions(Employee employee);
+	public Employee viewAccount(Employee employee);
+	public List<Customer> viewTransactions(Customer customer);
 
 }

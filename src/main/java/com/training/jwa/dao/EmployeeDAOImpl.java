@@ -11,12 +11,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import com.training.jwa.employeeMenu;
 import com.training.jwa.model.Customer;
 import com.training.jwa.model.Employee;
 import com.training.jwa.utility.DBConnection;
 
 public class EmployeeDAOImpl implements EmployeeDAO {
 	Scanner scan = new Scanner(System.in);
+	int employeeId = 0;
+	String employeeName = "";
+	String employeePassword = "";
+	double accountBalance = 0;
+	String customerName = "";
+	String customerPassword = "";
 
 	@Override
 	public boolean accountApproval(String username) {
@@ -54,44 +61,63 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 	
 
 	@Override
-	public void viewAccount(Employee employee) {
+	public Employee viewAccount(Employee employee) {
 		Connection con = DBConnection.getConnection();
         PreparedStatement stat;
         
         try {
-            stat= con.prepareStatement("select * from customer where Id= ?");
-            stat.setInt(1, employee.getEmployeeId());
+            stat= con.prepareStatement("select id, username, password, balance from customer where username= ?");
+            stat.setString(1, employee.getEmployeeName());
             ResultSet res = stat.executeQuery();
             
-            while(res.next()) {
-            	employee.setEmployeeId(res.getInt(1));
-            	employee.setEmployeeName(res.getString(2));
-            	employee.setEmployeePassword(res.getString(3));
-            	employee.setAccountType(res.getBoolean(4));
-            	
-            }
-            con.close();
+            res.next();
+            employee.setEmployeeId(res.getInt(1));
+            employee.setEmployeeName(res.getString(2));
+            employee.setEmployeePassword(res.getString(3));
+            employee.setAccountBalance(res.getInt(4));
+            
+            return employee;
+            
         }catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
 		
         }
+		return null;
+	}
+	
+	public Customer searchByEmployeeId(int customerId) {
+		Connection con = DBConnection.getConnection();
+		Customer customer = new Customer(customerId, customerName, customerPassword, accountBalance);
+		PreparedStatement stat;
+		try {
+			stat = con.prepareStatement("select id from customer where Id = ?");
+			stat.setInt(1, employeeId);
+
+			ResultSet res = stat.executeQuery();
+			res.next();
+			customer.setCustomerId(res.getInt(1));
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return customer;
 	}
 
 	@Override
-	public List<Employee> viewTransactions(Employee employee) {
-		System.out.println("Printing user transactions ");
-		List<Employee> transactions = new ArrayList<Employee>();
+	public List<Customer> viewTransactions(Customer customer) {
+		List<Customer> transactions = new ArrayList<Customer>();
 		Connection con = DBConnection.getConnection();
 		Statement stat;
 		try {
 			stat = con.createStatement();
-			ResultSet res = stat.executeQuery("select * from transaction");
+			ResultSet res = stat.executeQuery("select id, amount from transaction join customer where customerid_send = id");
 
 			while (res.next()) {
-				employee.setEmployeeId(res.getInt(1));
-				employee.setAccountBalance(res.getDouble(2));
-				transactions.add(employee);
+				customer.setCustomerId(res.getInt(1));
+				customer.setAccountBalance(res.getDouble(2));
+				transactions.add(customer);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
