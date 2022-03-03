@@ -1,5 +1,6 @@
 package com.training.jwa;
 
+import java.math.BigDecimal;
 import java.util.Scanner;
 
 import com.training.jwa.dao.CustomerDAO;
@@ -17,7 +18,7 @@ public class customerMenu {
 	CustomerDAO customDAO = new CustomerDAOImpl();
 	Login login = new Login();
 	double accountBalance = 0;
-	double amount = 0;
+	BigDecimal amount;
 	int customerId = 0;
 	String customerName = "";
 	String customerPassword = "";
@@ -41,19 +42,19 @@ public class customerMenu {
 	case 1:
 		System.out.println("Enter the customer name to view current balance :");
 		customerName = scanner.next();
-		Customer cust = new Customer(customerId, customerName, customerName, accountBalance, amount);
+		Customer cust = new Customer(customerId, customerName, customerPassword, accountBalance, amount);
 		cust = customDAO.viewBalance(cust);
 		System.out.println(cust);
 		break;
 
 	case 2:
 		System.out.println("Enter User ID: ");
-		int id = scanner.nextInt();
+		int cid = scanner.nextInt();
 		
 		System.out.println("Enter the amount to be withdrawn :");
-		amount = scanner.nextInt();
-		
-		Customer custom = new Customer(id, customerName, customerPassword, accountBalance, amount);
+		BigDecimal money = scanner.nextBigDecimal();
+		cust = new Customer(customerId, customerName, customerPassword, accountBalance, amount);
+		customDAO.withdraw(cust);
 		break;
 
 	case 3:
@@ -61,7 +62,10 @@ public class customerMenu {
 		int deposit = scanner.nextInt();
 		
 		System.out.println("Enter the amount to be deposited :");
-		//amount = scanner.nextInt();
+		BigDecimal dMoney = scanner.nextBigDecimal();
+		cust = new Customer(customerId, customerName, customerPassword, accountBalance, amount);
+		customDAO.deposit(cust);
+		
 		break;
 
 	case 4:
@@ -72,7 +76,9 @@ public class customerMenu {
 		int receiver = scanner.nextInt();
 		
 		System.out.println("Enter the amount to be transferred :");
-		//amount = scanner.nextInt();
+		BigDecimal tMoney = scanner.nextBigDecimal();
+		cust = new Customer(customerId, customerName, customerPassword, accountBalance, amount);
+		customDAO.transfer(cust);
 		break;
 
 	case 5:
@@ -83,7 +89,9 @@ public class customerMenu {
 		receiver = scanner.nextInt();
 		
 		System.out.println("Enter the amount to be transferred :");
-		//amount = scanner.nextInt();
+		amount = scanner.nextBigDecimal();
+		cust = new Customer(customerId, customerName, customerPassword, accountBalance, amount);
+		customDAO.transfer(cust);
 		break;
 
 	case 6:

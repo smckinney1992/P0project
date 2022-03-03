@@ -49,7 +49,7 @@ public class CustomerDAOImpl implements CustomerDAO{
 		try {
 			stat = connection.prepareCall("call withdrawal(?,?,?)");
 			stat.setInt(1, customer.getCustomerId());
-			stat.setDouble(2, customer.getAmount());
+			stat.setBigDecimal(2, customer.getAmount());
 			
 			stat.registerOutParameter(3, Types.INTEGER);
 			stat.setInt(3, withdrawBalance);
@@ -72,7 +72,7 @@ public class CustomerDAOImpl implements CustomerDAO{
 		try {
 			stat = connection.prepareCall("call depositing(?,?,?)");
 			stat.setInt(1, customer.getCustomerId());
-			stat.setDouble(2, customer.getAmount());
+			stat.setBigDecimal(2, customer.getAmount());
 			
 			stat.registerOutParameter(3, Types.INTEGER);
 			stat.setInt(3, depositBalance);
@@ -91,22 +91,22 @@ public class CustomerDAOImpl implements CustomerDAO{
 		
 		int debitorBalance=0, creditorBalance=0;
 		
-		System.out.println("Enter the account number to debit the amount :");
+		/*System.out.println("Enter the account number to debit the amount :");
 		int sender = scanner.nextInt();
 		
 		System.out.println("Enter the account number to credit the amount :");
 		int receiver = scanner.nextInt();
 		
 		System.out.println("Enter the amount to be transferred :");
-		int amount = scanner.nextInt();
+		int amount = scanner.nextInt();*/
 		
 		Connection connection = DBConnection.getConnection();
 		CallableStatement stat;
 		try {
 			stat = connection.prepareCall("call transfer(?,?,?,?,?)");
-			stat.setInt(1, sender);
-			stat.setInt(2, receiver);
-			stat.setInt(3, amount);
+			stat.setInt(1, customer.getCustomerId());
+			stat.setInt(2, customer.getCustomerId());
+			stat.setBigDecimal(3, customer.getAmount());
 			
 			stat.registerOutParameter(4, Types.INTEGER);
 			stat.setInt(4, debitorBalance);
