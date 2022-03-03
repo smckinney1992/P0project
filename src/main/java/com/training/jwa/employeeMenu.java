@@ -24,6 +24,9 @@ public class employeeMenu {
 		String employeePassword = "";
 		double accountBalance = 0;
 		int customerId = 0;
+		String customerName = "";
+		String customerPassword = "";
+		
 		
 		while (true) {
 			System.out.println("BANK  -  EMPLOYEE MENU");
@@ -63,8 +66,9 @@ public class employeeMenu {
 			case 3:
 				System.out.println("Please enter the user id you would like to view transaction log");
 				customerId = scanner.nextInt();
-				if(searchByEmployeeId(customerId).equals(customerId)) {
-					empDAO.viewTransactions(Customer customer);
+				Customer customer = new Customer(customerId, customerName, customerPassword, accountBalance);
+				if(searchByEmployeeId(customerId) != null) {
+					empDAO.viewTransactions(customer);
 				} else {
 					System.out.println("Customer ID doesn't exist");
 				}

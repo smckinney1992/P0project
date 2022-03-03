@@ -20,22 +20,24 @@ public class CustomerDAOImpl implements CustomerDAO{
 	Scanner scanner = new Scanner(System.in);
 	
 	@Override
-	public void viewBalance(Customer customer) {
+	public Customer viewBalance(Customer customer) {
 		
 		Connection connection = DBConnection.getConnection();
 		PreparedStatement statement;
 		try {
-			statement = connection.prepareStatement("select * from customer where username = ?");
+			statement = connection.prepareStatement("select balance from customer where username = ?");
 			statement.setString(1, customer.getCustomerName());
 			
 			ResultSet res = statement.executeQuery();
 			res.next();
+			customer.setAccountBalance(res.getDouble(1));
 			
 			System.out.println("Printing customer's curerent balance: " +res);
 			//statement.execute();
 		} catch(SQLException e) {
 			e.printStackTrace();
 		}
+		return customer;
 	}
 
 	@Override

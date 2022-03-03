@@ -6,6 +6,7 @@ import com.training.jwa.dao.CustomerDAO;
 import com.training.jwa.dao.CustomerDAOImpl;
 import com.training.jwa.dao.LoginDAO;
 import com.training.jwa.dao.LoginDAOImpl;
+import com.training.jwa.model.Customer;
 import com.training.jwa.model.Login;
 
 public class customerMenu {
@@ -15,9 +16,10 @@ public class customerMenu {
 	LoginDAO loginDAO = new LoginDAOImpl();
 	CustomerDAO customDAO = new CustomerDAOImpl();
 	Login login = new Login();
-	double account = 0;
-	double balance = 0;
-	double amount;
+	double accountBalance = 0;
+	int customerId = 0;
+	String customerName = "";
+	String customerPassword = "";
 
 	public void CustomerMenu() {
 	while (true) {
@@ -36,9 +38,11 @@ public class customerMenu {
 	
 	switch (choice) {
 	case 1:
-		System.out.println("Enter the account number to view current balance :");
-		int account = scanner.nextInt();
-		//System.out.println("Here is the account balance: " +balance);
+		System.out.println("Enter the customer name to view current balance :");
+		customerName = scanner.next();
+		Customer cust = new Customer(customerId, customerName, customerName, accountBalance);
+		cust = customDAO.viewBalance(cust);
+		System.out.println(cust);
 		break;
 
 	case 2:
@@ -46,7 +50,7 @@ public class customerMenu {
 		int withdraw = scanner.nextInt();
 		
 		System.out.println("Enter the amount to be withdrawn :");
-		amount = scanner.nextInt();
+		//amount = scanner.nextInt();
 		break;
 
 	case 3:
@@ -54,7 +58,7 @@ public class customerMenu {
 		int deposit = scanner.nextInt();
 		
 		System.out.println("Enter the amount to be deposited :");
-		amount = scanner.nextInt();
+		//amount = scanner.nextInt();
 		break;
 
 	case 4:
@@ -65,7 +69,7 @@ public class customerMenu {
 		int receiver = scanner.nextInt();
 		
 		System.out.println("Enter the amount to be transferred :");
-		amount = scanner.nextInt();
+		//amount = scanner.nextInt();
 		break;
 
 	case 5:
@@ -76,7 +80,7 @@ public class customerMenu {
 		receiver = scanner.nextInt();
 		
 		System.out.println("Enter the amount to be transferred :");
-		amount = scanner.nextInt();
+		//amount = scanner.nextInt();
 		break;
 
 	case 6:

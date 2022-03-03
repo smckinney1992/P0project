@@ -92,7 +92,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 		PreparedStatement stat;
 		try {
 			stat = con.prepareStatement("select id from customer where Id = ?");
-			stat.setInt(1, employeeId);
+			stat.setInt(1, customerId);
 
 			ResultSet res = stat.executeQuery();
 			res.next();
