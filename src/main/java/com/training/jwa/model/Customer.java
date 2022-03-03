@@ -1,7 +1,7 @@
 package com.training.jwa.model;
 
 public class Customer {
-	private String accountType;
+	private Boolean accountType;
 	private int customerId;
 	private String customerName;
 	private String customerPassword;
@@ -9,7 +9,7 @@ public class Customer {
 	private double accountBalance;
 	private int amount;
 	
-	public Customer(String accountType, int customerId, String customerName, String customerPassword, int cAccountNum,
+	public Customer(Boolean accountType, int customerId, String customerName, String customerPassword, int cAccountNum,
 			double accountBalance, int amount) {
 		super();
 		this.accountType = accountType;
@@ -21,11 +21,11 @@ public class Customer {
 		this.amount = amount;
 	}
 
-	public String getAccountType() {
+	public Boolean getAccountType() {
 		return accountType;
 	}
 
-	public void setAccountType(String accountType) {
+	public void setAccountType(Boolean accountType) {
 		this.accountType = accountType;
 	}
 

@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -18,14 +19,14 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 	Scanner scan = new Scanner(System.in);
 
 	@Override
-	public boolean accountApproval(Customer customer) {
+	public boolean accountApproval(String username) {
 		boolean status = false;
 		Connection con = DBConnection.getConnection();
 		PreparedStatement statement;
 		CallableStatement update;
 		try {
-			statement = con.prepareStatement("select * from customer where id = ?");
-			statement.setInt(1, customer.getCustomerId());
+			statement = con.prepareStatement("select * from customer where username = ?");
+			statement.setString(1, username);
 			ResultSet res = statement.executeQuery();
 			status = res.next();
 			
@@ -33,8 +34,9 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 			String ans = scan.next();
 			
 			if(ans.toUpperCase().equals("T")) {
-			update = con.prepareCall("call updateAccount(?)");
-			update.setInt(1, customer.getCustomerId());
+			update = con.prepareCall("call approveAccount(?,?)");
+			update.setString(1, username);
+			update.registerOutParameter(2, Types.BOOLEAN);
 			update.execute();
 			status = true;
 			}

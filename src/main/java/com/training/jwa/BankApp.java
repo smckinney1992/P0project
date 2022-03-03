@@ -71,12 +71,10 @@ public class BankApp {
 				if(loginDAO.checkEmployee(username)) {
 					//employee account exists;
 					eMenu.EmployeeMenu();
-				if (loginDAO.checkCustomer(username)) {
+				}else if (loginDAO.checkCustomer(username)) {
 					//customer account exists;
 					cMenu.CustomerMenu();
 				}else {}
-					
-				}
 				break;
 
 			default:
